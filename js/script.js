@@ -1,26 +1,17 @@
 "use strict";
 
-let firstParameter,
-secondParameter,
-additionResult,
-deductionResult,
-multiplicationResult,
-divisionResult,
-elevationResultForFirst,
-elevationResultForSecond;
+let x = Number(prompt('Please enter first parameter:', 10));
+let y = Number(prompt('Please enter second parameter:', 5));
 
-firstParameter = Number(prompt('Please enter first parameter:', 10));
-secondParameter = Number(prompt('Please enter second parameter:', 5));
+console.log(`First parameter: ${x}`);
+console.log(`Second parameter: ${y}`);
 
-console.log(`First parameter: ${firstParameter}`);
-console.log(`Second parameter: ${secondParameter}`);
-
-additionResult = firstParameter + secondParameter;
-deductionResult = firstParameter - secondParameter;
-multiplicationResult = firstParameter * secondParameter;
-divisionResult = firstParameter/secondParameter;
-elevationResultForFirst = firstParameter ** 2;
-elevationResultForSecond = secondParameter ** 2;
+let additionResult = x + y;
+let deductionResult = x - y;
+let multiplicationResult = x * y;
+let divisionResult = x/y;
+let elevationResultForFirst = x ** 2;
+let elevationResultForSecond = x ** 2;
 
 console.log(`Addition result: ${additionResult}`);
 console.log(`Deduction result: ${deductionResult}`);
