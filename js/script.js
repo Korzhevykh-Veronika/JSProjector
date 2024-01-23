@@ -1,6 +1,6 @@
 "use strict";
 
-var homework = Number(prompt('Please enter homework number:', 2))
+let homework = Number(prompt('Please enter homework number:', 2))
 
 if(homework == 1){
     // HW1
@@ -37,7 +37,7 @@ else if (homework == 2){
     console.log(`Boolean variable: ${boolVariable}`);
 
     // Currency Converter
-    let exchangeRate = 8.5689;
+    const exchangeRate = 8.5689;
     let sumOfUAH = Number(prompt('Please enter the sum of UAH, you want to convert:', 100));
 
     let exchangeResult = +exchangeRate.toFixed(2) * sumOfUAH;
