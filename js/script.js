@@ -1,8 +1,20 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 2))
+let homework = Number(prompt('Please enter homework number:', 3))
 
-if(homework == 1){
+switch(homework){
+    case 1:
+        runHW1();
+        break;
+    case 2:
+        runHW2();
+        break;
+    case 3:
+        runHW3();
+        break;    
+}
+
+function runHW1() {
     // HW1
     let x = Number(prompt('Please enter first parameter:', 10));
     let y = Number(prompt('Please enter second parameter:', 5));
@@ -24,7 +36,8 @@ if(homework == 1){
     console.log(`Elevation result (first parameter): ${elevationResultForFirst}`);
     console.log(`Elevation result (second parameter): ${elevationResultForSecond}`);
 }
-else if (homework == 2){
+
+function runHW2() {
     // HW2
     let variable = prompt('Please enter value:', 0);
 
@@ -63,4 +76,61 @@ else if (homework == 2){
 
     console.log(`Sum of two values : ${binaryResult}`);
     console.log(`Sum of two values in binary form: ${binaryResult.toString(2)}`);
+}
+
+function runHW3() {
+    let value = prompt('Please enter value:', 10);
+
+    if(!isNaN(value)){   
+        let i = 2;
+        while (i < value) {
+            if (i % 2 == 0){                
+                console.log(`All even numbers less than ${value} (while): ${i}`);
+            }
+            i++;
+          }
+
+          for(let i = 2; i < value; i++){
+            if (i % 2 == 0){
+                console.log(`All even numbers less than ${value} (for): ${i}`);
+            }
+          }
+    }
+    else{
+        console.log("Enter correct number value!")
+    }
+
+    //FizzBuzz
+    let fizzBuzzResult = [];
+
+    for(let i = 1; i <= 100; i++){
+        if (i % 3 == 0 && i % 5 == 0){
+            fizzBuzzResult.push("FizzBuzz");
+        }
+        else if (i % 3 == 0){
+            fizzBuzzResult.push("Fizz");
+        }
+        else if (i % 5 == 0){
+            fizzBuzzResult.push("Buzz");
+        }
+        else{
+            fizzBuzzResult.push(i);
+        }    
+      }
+
+      console.log(`FizzBuzz result: ${fizzBuzzResult}`);
+
+    // Additional task
+    let string = '42559125';
+    let result = '';
+
+    for(let i = 0; i < string.length; i++){
+        if(Number(string[i]) < 5){
+            result += 0;
+        }
+        else if(Number(string[i]) >= 5) {
+            result += 1;
+        }
+    }
+    console.log(`Additional task result: ${result}`);
 }
