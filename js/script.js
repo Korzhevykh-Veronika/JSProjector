@@ -84,14 +84,14 @@ function runHW3() {
     if(!isNaN(value)){   
         let i = 2;
         while (i < value) {
-            if (i % 2 == 0){                
+            if (i % 2 === 0){                
                 console.log(`All even numbers less than ${value} (while): ${i}`);
             }
             i++;
         }
 
         for(let i = 2; i < value; i++){
-            if (i % 2 == 0){
+            if (i % 2 === 0){
                 console.log(`All even numbers less than ${value} (for): ${i}`);
             }
         }
@@ -104,13 +104,13 @@ function runHW3() {
     let fizzBuzzResult = [];
 
     for(let i = 1; i <= 100; i++){
-        if (i % 3 == 0 && i % 5 == 0){
+        if (i % 15 === 0){
             fizzBuzzResult.push("FizzBuzz");
         }
-        else if (i % 3 == 0){
+        else if (i % 3 === 0){
             fizzBuzzResult.push("Fizz");
         }
-        else if (i % 5 == 0){
+        else if (i % 5 === 0){
             fizzBuzzResult.push("Buzz");
         }
         else{
