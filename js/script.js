@@ -88,13 +88,13 @@ function runHW3() {
                 console.log(`All even numbers less than ${value} (while): ${i}`);
             }
             i++;
-          }
+        }
 
-          for(let i = 2; i < value; i++){
+        for(let i = 2; i < value; i++){
             if (i % 2 == 0){
                 console.log(`All even numbers less than ${value} (for): ${i}`);
             }
-          }
+        }
     }
     else{
         console.log("Enter correct number value!")
@@ -125,12 +125,8 @@ function runHW3() {
     let result = '';
 
     for(let i = 0; i < string.length; i++){
-        if(Number(string[i]) < 5){
-            result += 0;
-        }
-        else if(Number(string[i]) >= 5) {
-            result += 1;
-        }
+        string[i] < 5 ? result += 0 : result += 1;
     }
+
     console.log(`Additional task result: ${result}`);
 }
