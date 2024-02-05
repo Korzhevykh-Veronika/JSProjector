@@ -137,11 +137,7 @@ function runHW3() {
 function runHW4() {
     //A number reversal task
     const currentMaxValue = 4589;
-    let reverseMaxValue;
-    let arrayOfNumbers = currentMaxValue.toString().split("");
-    
-    arrayOfNumbers.reverse();
-    reverseMaxValue = Number(arrayOfNumbers.join(""));
+    let reverseMaxValue = Number(currentMaxValue.toString().split("").reverse().join(""));
    
     console.log(reverseMaxValue);
     console.log(typeof reverseMaxValue);
