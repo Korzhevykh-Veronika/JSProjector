@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 3))
+let homework = Number(prompt('Please enter homework number:', 4))
 
 switch(homework){
     case 1:
@@ -11,7 +11,10 @@ switch(homework){
         break;
     case 3:
         runHW3();
-        break;    
+        break;  
+    case 4:
+        runHW4();
+        break;     
 }
 
 function runHW1() {
@@ -129,4 +132,27 @@ function runHW3() {
     }
 
     console.log(`Additional task result: ${result}`);
+}
+
+function runHW4() {
+    //A number reversal task
+    const currentMaxValue = 4589;
+    let reverseMaxValue;
+    let arrayOfNumbers = currentMaxValue.toString().split("");
+    
+    arrayOfNumbers.reverse();
+    reverseMaxValue = Number(arrayOfNumbers.join(""));
+   
+    console.log(reverseMaxValue);
+    console.log(typeof reverseMaxValue);
+
+    //product of an array of numbers
+    const resultsArray = [1, 2, [3, [4]]];
+    let productOfArray = 1;
+
+    for(let result of resultsArray.flat(Infinity)){
+        productOfArray *= result;
+    }
+    
+    console.log(productOfArray);
 }
