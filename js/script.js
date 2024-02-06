@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 4))
+let homework = Number(prompt('Please enter homework number:', 5))
 
 switch(homework){
     case 1:
@@ -14,6 +14,9 @@ switch(homework){
         break;  
     case 4:
         runHW4();
+        break; 
+    case 5:
+        runHW5();
         break;     
 }
 
@@ -151,4 +154,20 @@ function runHW4() {
     }
     
     console.log(productOfArray);
+}
+
+function runHW5() {
+    const priceData = {
+        Apples: '23.4',
+        BANANAS: '48',
+        oRAnGEs: '48.7584',
+    };
+    
+    let updatedPriceData = {};
+
+    for (let key in priceData){
+        updatedPriceData[key.toLowerCase()] = Number(priceData[key]).toFixed(2);
+    }
+
+    console.log(updatedPriceData);
 }
