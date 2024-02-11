@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 5))
+let homework = Number(prompt('Please enter homework number:', 6))
 
 switch(homework){
     case 1:
@@ -17,6 +17,9 @@ switch(homework){
         break; 
     case 5:
         runHW5();
+        break; 
+    case 6:
+        runHW6();
         break;     
 }
 
@@ -170,4 +173,58 @@ function runHW5() {
     }
 
     console.log(updatedPriceData);
+}
+
+function runHW6(){
+    //The task of iteration
+    function iterativeOddSumTo(number) {
+        let result = 0;
+        for(let i = 0; i <= number; i++){
+            if(i % 2 != 0){
+                result += i;
+            }
+        }
+        return result;
+    };
+        
+    console.log(iterativeOddSumTo(1)) // 1
+    console.log(iterativeOddSumTo(9)) // 25
+    console.log(iterativeOddSumTo(10)) // 25
+
+    //recursive
+    function recursiveOddSumTo(number) {
+        let result = 0;
+        if (number === 0){
+            return result;
+        }
+        
+        if (number % 2 != 0){
+            result +=number;
+        }
+
+        return result + recursiveOddSumTo(number-1);
+    };
+    
+    console.log(recursiveOddSumTo(1)) // 1
+    console.log(recursiveOddSumTo(9)) // 25
+    console.log(recursiveOddSumTo(10)) // 25
+
+    //Additional task
+    const isXOEqual = (str) => {
+        var allChars = str.toLowerCase().split("");
+        let numberOfOChar = 0;
+        let numberOfXChar = 0;
+
+        for(let char of allChars){
+            char == 'o' ? numberOfOChar++ : char == 'x' ? numberOfXChar++ : null;
+        }
+
+        return numberOfOChar == numberOfXChar ? true : false;
+    }
+    
+    console.log(isXOEqual("ooxx")) // true
+    console.log(isXOEqual("xooxx")) // false
+    console.log(isXOEqual("ooxXm")) // true
+    console.log(isXOEqual("zpzpzpp")) // коли немає 'x' та 'o' то має повертати true бо 0 = 0
+    console.log(isXOEqual("zzoo")) // false
 }
