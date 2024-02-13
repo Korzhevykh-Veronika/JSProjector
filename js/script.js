@@ -179,10 +179,8 @@ function runHW6(){
     //The task of iteration
     function iterativeOddSumTo(number) {
         let result = 0;
-        for(let i = 0; i <= number; i++){
-            if(i % 2 != 0){
-                result += i;
-            }
+        for(let i = 1; i <= number; i += 2 ){
+            result += i;
         }
         return result;
     };
@@ -193,16 +191,16 @@ function runHW6(){
 
     //recursive
     function recursiveOddSumTo(number) {
-        let result = 0;
-        if (number === 0){
+        let result = 1;
+        if (number === 1){
             return result;
         }
         
         if (number % 2 != 0){
-            result +=number;
+            return number + recursiveOddSumTo(number - 2);
         }
 
-        return result + recursiveOddSumTo(number-1);
+        return recursiveOddSumTo(number-1);
     };
     
     console.log(recursiveOddSumTo(1)) // 1
@@ -211,15 +209,20 @@ function runHW6(){
 
     //Additional task
     const isXOEqual = (str) => {
-        var allChars = str.toLowerCase().split("");
+        let allChars = str.toLowerCase().split("");
         let numberOfOChar = 0;
         let numberOfXChar = 0;
 
         for(let char of allChars){
-            char == 'o' ? numberOfOChar++ : char == 'x' ? numberOfXChar++ : null;
+            if (char == 'o'){
+                numberOfOChar++;
+            }
+            else if(char == 'x'){
+                numberOfXChar++;
+            }
         }
 
-        return numberOfOChar == numberOfXChar ? true : false;
+        return numberOfOChar == numberOfXChar;
     }
     
     console.log(isXOEqual("ooxx")) // true
