@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 6))
+let homework = Number(prompt('Please enter homework number:', 7))
 
 switch(homework){
     case 1:
@@ -20,7 +20,13 @@ switch(homework){
         break; 
     case 6:
         runHW6();
-        break;     
+        break;  
+    case 7:
+        runHW7();
+        break;   
+    default:
+        console.log("Enter correct value (from 1 to 7)!")
+        break;
 }
 
 function runHW1() {
@@ -230,4 +236,72 @@ function runHW6(){
     console.log(isXOEqual("ooxXm")) // true
     console.log(isXOEqual("zpzpzpp")) // коли немає 'x' та 'o' то має повертати true бо 0 = 0
     console.log(isXOEqual("zzoo")) // false
+}
+
+function runHW7(){
+    //Find product
+    const resultsArray = [1, 2, [3, [4]]];
+    let productOfArray = resultsArray.flat(Infinity).reduce((product, currentValue) => product * currentValue, 1);
+    
+    console.log(productOfArray); // 24
+
+    //Update object
+    const priceData = {
+        Apples: '23.4',
+        BANANAS: '48',
+        oRAngGEs: '48.7584',
+        };
+    
+    function optimizer(data) {
+        let entries = Object.entries(data);
+        let updatedEntries = [];
+
+        for(let entry of entries){
+            let array = [];
+            entry.forEach((element) => {
+                array.push(isNaN(Number(element)) ? element.toLowerCase() : Number(element).toFixed(2));
+            });
+            
+            updatedEntries.push(array);
+        }
+
+        return Object.fromEntries(updatedEntries);
+    };
+    
+    let updatedPriceData = optimizer(priceData);
+    
+    console.log(updatedPriceData) // {apples: '23.40', bananas: '48.00', oranges: '48.76'}
+
+    //Filter array
+    const userNames = ['Петро', 'Емма', 'Юстин', 'Ілля', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
+    const vowelsArray = ['А', 'Е', 'О', 'У', 'І', 'И', 'Ю'];
+    
+    let filteredNames = userNames.filter(name => vowelsArray.includes(name[0]));
+    let filteredNamesWithCycle = [];
+    userNames.forEach((name) => {
+        if (vowelsArray.includes(name[0])) {
+            filteredNamesWithCycle.push(name);
+        }
+    }); 
+
+    console.log(filteredNames); // ['Емма', 'Юстин', 'Ілля', 'Яна', 'Антон', 'Олена']
+    console.log(filteredNamesWithCycle); // ['Емма', 'Юстин', 'Ілля', 'Яна', 'Антон', 'Олена']
+
+    //Sort array
+    const userFullNames = ["Петрик Ольга Іванівна", "Гнатюк Петро Антонович", "Рудко Андрій Опанасович"];
+    let initials = [];
+
+    userFullNames.sort().forEach((fullName) => {
+        initials.push(fullName.split(" ").map(n => n[0]).join("."));
+    })
+    
+    console.log(initials); // [ "Г.П.А.", "П.О.І.", "Р.А.О."]
+
+    //Additional task
+    function sortArray(arr) {
+        return arr === null || arr === undefined ? new Array() : arr.sort((a,b) => a - b);
+    }
+    
+    console.log(sortArray([1, 12, 10, 50, 5])); // поверне [1,5,10,12,50]
+    console.log(sortArray(null)); // поверне []
 }
