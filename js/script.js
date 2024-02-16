@@ -254,16 +254,11 @@ function runHW7(){
     
     function optimizer(data) {
         let entries = Object.entries(data);
-        let updatedEntries = [];
-
-        for(let entry of entries){
-            let array = [];
-            entry.forEach((element) => {
-                array.push(isNaN(Number(element)) ? element.toLowerCase() : Number(element).toFixed(2));
+        let updatedEntries = entries.map((entry) => {
+            return entry.map((element) => {
+                return isNaN(Number(element)) ? element.toLowerCase() : Number(element).toFixed(2);
             });
-            
-            updatedEntries.push(array);
-        }
+        });
 
         return Object.fromEntries(updatedEntries);
     };
@@ -290,16 +285,17 @@ function runHW7(){
     //Sort array
     const userFullNames = ["Петрик Ольга Іванівна", "Гнатюк Петро Антонович", "Рудко Андрій Опанасович"];
     let initials = [];
-
-    userFullNames.sort().forEach((fullName) => {
-        initials.push(fullName.split(" ").map(n => n[0]).join("."));
+    const copyArray = [...userFullNames];
+    initials = copyArray.sort().map((fullName) => {
+        return fullName.split(" ").map(name => name[0]).join(".");
     })
     
     console.log(initials); // [ "Г.П.А.", "П.О.І.", "Р.А.О."]
 
     //Additional task
-    function sortArray(arr) {
-        return arr === null || arr === undefined ? new Array() : arr.sort((a,b) => a - b);
+    function sortArray(arr = []) {
+        const copyArray = Object.assign([], arr);
+        return copyArray === null || copyArray === undefined ? [] : copyArray.sort((a,b) => a - b);
     }
     
     console.log(sortArray([1, 12, 10, 50, 5])); // поверне [1,5,10,12,50]
