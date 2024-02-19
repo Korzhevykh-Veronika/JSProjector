@@ -254,13 +254,11 @@ function runHW7(){
     
     function optimizer(data) {
         let entries = Object.entries(data);
-        let updatedEntries = entries.map((entry) => {
-            return entry.map((element) => {
-                return isNaN(Number(element)) ? element.toLowerCase() : Number(element).toFixed(2);
-            });
-        });
+        let updatedEntries = entries.map(([key, value]) => {
+            return { key : key.toLowerCase(), value : Number(value).toFixed(2)}
+         });
 
-        return Object.fromEntries(updatedEntries);
+        return Object.fromEntries(updatedEntries.map(item => [item.key, item.value]));
     };
     
     let updatedPriceData = optimizer(priceData);
@@ -293,7 +291,7 @@ function runHW7(){
     console.log(initials); // [ "Г.П.А.", "П.О.І.", "Р.А.О."]
 
     //Additional task
-    function sortArray(arr = []) {
+    function sortArray(arr) {
         const copyArray = Object.assign([], arr);
         return copyArray === null || copyArray === undefined ? [] : copyArray.sort((a,b) => a - b);
     }
