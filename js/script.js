@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 8))
+let homework = Number(prompt('Please enter homework number:', 7))
 
 switch(homework){
     case 1:
@@ -23,9 +23,6 @@ switch(homework){
         break;  
     case 7:
         runHW7();
-        break;   
-    case 8:
-        runHW8();
         break;   
     default:
         console.log("Enter correct value (from 1 to 7)!")
@@ -301,26 +298,4 @@ function runHW7(){
     
     console.log(sortArray([1, 12, 10, 50, 5])); // поверне [1,5,10,12,50]
     console.log(sortArray(null)); // поверне []
-}
-
-function runHW8(){
-    //addThemAll
-    console.log(addThemAll(2,4)); // 6
-    console.log(addThemAll(1,2,3,4)); // 10
-    console.log(addThemAll(5,5,10)); // 20
-
-    function addThemAll(...args){
-        return args.reduce((sum, currentValue) => sum + currentValue, 0)
-    }
-
-    //multiply
-    console.log(multiply(5)(5))		// 25
-    console.log(multiply(2)(-2))	// -4
-    console.log(multiply(4)(3))		// 12
-
-    function multiply(a) {
-        return function (b) {
-            return a * b;
-        };
-    }
 }
