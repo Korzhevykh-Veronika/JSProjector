@@ -292,7 +292,10 @@ function runHW7(){
 
     //Additional task
     function sortArray(arr) {
-        const copyArray = Object.assign([], arr);
+        if(arr === null){
+            arr = [];
+        }
+        const copyArray = [...arr];
         return copyArray === null || copyArray === undefined ? [] : copyArray.sort((a,b) => a - b);
     }
     
