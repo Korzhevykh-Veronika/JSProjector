@@ -293,8 +293,9 @@ function runHW7(){
     //Additional task
     function sortArray(arr) {
         if(arr === null){
-            arr = [];
+           return [];
         }
+        
         const copyArray = [...arr];
         return copyArray === null || copyArray === undefined ? [] : copyArray.sort((a,b) => a - b);
     }
