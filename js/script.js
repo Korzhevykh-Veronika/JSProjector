@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 9))
+let homework = Number(prompt('Please enter homework number:', 10))
 
 switch(homework){
     case 1:
@@ -29,6 +29,9 @@ switch(homework){
         break;   
     case 9:
         runHW9();
+        break;  
+    case 10:
+        runHW10();
         break;   
     default:
         console.log("Enter correct value (from 1 to 7)!")
@@ -394,4 +397,49 @@ let securedSelfDescribeMyHobby = me.describeMyHobby.bind(me);
 setTimeout(securedSelfIntroduce, 1000); 
 setTimeout(securedSelfDescribeMyJob, 2000); 
 setTimeout(securedSelfDescribeMyHobby, 3000);
+}
+
+function runHW10(){
+
+    function timeDifference(startDate = '01 Jan 2023', endDate = '01 Jan 2024', dimensionality = 'days'){
+        const millisecondsInSecond = 1000;
+        const millisecondsInMinute = 60000;
+        const minutesInHour = 3600;
+        const minutesInDay = 1440;
+        let durationBetweenDates = Math.abs(Date.parse(endDate) - Date.parse(startDate));
+
+        switch (dimensionality){
+            case 'days':
+                return durationBetweenDates / millisecondsInMinute / minutesInDay
+                break;
+            case 'hours':
+                return durationBetweenDates / millisecondsInMinute / minutesInHour
+                break;
+            case 'minutes':
+                return durationBetweenDates / millisecondsInMinute
+                break;
+            case 'seconds':
+                return durationBetweenDates / millisecondsInSecond
+                break;
+            default:
+                return 'Enter correct value!';
+                break;            
+        }
+    }
+
+    console.log(timeDifference('02 Aug 1985', '03 Aug 1985', 'seconds')); // поверне '86400 seconds'
+    console.log(timeDifference('31 Jan 2022', '03 Feb 2021', 'days')); // поверне '362 days'
+    console.log(timeDifference()); // поверне '365 days'
+    console.log(timeDifference('02 Aug 1985', '03 Aug 1985', 'sec')); // поверне помилку
+
+
+    const userNames = ['Петро', 'Емма', 'Петро', 'Емма', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена', 'Емма'];
+
+    function filterUnique(array) {
+        let uniqueArray = new Set([...array]);
+        return [...uniqueArray];
+    }
+
+    console.log(filterUnique(userNames)); // ['Петро', 'Емма', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
+    
 }
