@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 8))
+let homework = Number(prompt('Please enter homework number:', 9))
 
 switch(homework){
     case 1:
@@ -26,6 +26,9 @@ switch(homework){
         break;   
     case 8:
         runHW8();
+        break;   
+    case 9:
+        runHW9();
         break;   
     default:
         console.log("Enter correct value (from 1 to 7)!")
@@ -327,4 +330,68 @@ function runHW8(){
             return a * b;
         };
     }
+}
+
+function runHW9(){
+
+detonatorTimerInterval(3);
+
+function detonatorTimerInterval(delay) {
+    const timer = setInterval(() => {
+        if (delay > 0) {
+            console.log(delay);
+            delay--;
+        } else {
+            clearInterval(timer);
+            console.log('BOOM!');
+        }
+    }, 1000);
+}
+
+detonatorTimerTimeout(3);
+
+function detonatorTimerTimeout(delay) {
+    function timeout() {
+        if (delay > 0) {
+            console.log(delay);
+            delay--;
+            setTimeout(timeout, 1000);
+        } else {
+            console.log('BOOM!');
+        }
+    }
+
+    setTimeout(timeout, 1000);
+}
+
+let me = {
+	firstName: 'Veronika ',
+	lastName: 'Korzhevykh',
+	city: 'Kyiv',
+	age: 23,
+	hobby: 'hot yoga',
+	currentJob: 'back-end developer',
+	futureJob: 'full-stack developer',
+	introduce() {
+		console.log(`My name is ${this.firstName + this.lastName}, I'm ${this.age} y.o. and I live in ${this.city}`);
+	},
+	describeMyJob(){
+		console.log(`Now I'm ${this.currentJob}, but in future I want to be ${this.futureJob}`);
+	},
+    describeMyHobby(){
+		console.log(`In my spare time I mostly spend it with my friends or go to ${this.hobby} classes`);
+	},
+}
+
+me.introduce();
+me.describeMyHobby();
+me.describeMyJob();
+
+let securedSelfIntroduce = me.introduce.bind(me);
+let securedSelfDescribeMyJob = me.describeMyJob.bind(me);
+let securedSelfDescribeMyHobby = me.describeMyHobby.bind(me);
+
+setTimeout(securedSelfIntroduce, 1000); 
+setTimeout(securedSelfDescribeMyJob, 2000); 
+setTimeout(securedSelfDescribeMyHobby, 3000);
 }
