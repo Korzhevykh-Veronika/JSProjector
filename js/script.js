@@ -402,28 +402,23 @@ setTimeout(securedSelfDescribeMyHobby, 3000);
 function runHW10(){
 
     function timeDifference(startDate = '01 Jan 2023', endDate = '01 Jan 2024', dimensionality = 'days'){
-        const millisecondsInSecond = 1000;
-        const millisecondsInMinute = 60000;
-        const minutesInHour = 3600;
-        const minutesInDay = 1440;
+        const MILLISEONDS_IN_SECOND = 1000;
+        const MILLISEONDS_IN_MINUTE = 60000;
+        const MINUTES_IN_HOUR = 3600;
+        const MINUTES_IN_DAY = 1440;
         let durationBetweenDates = Math.abs(Date.parse(endDate) - Date.parse(startDate));
 
         switch (dimensionality){
             case 'days':
-                return durationBetweenDates / millisecondsInMinute / minutesInDay
-                break;
+                return durationBetweenDates / MILLISEONDS_IN_MINUTE / MINUTES_IN_DAY + ' days';
             case 'hours':
-                return durationBetweenDates / millisecondsInMinute / minutesInHour
-                break;
+                return durationBetweenDates / MILLISEONDS_IN_MINUTE / MINUTES_IN_HOUR + ' hours';
             case 'minutes':
-                return durationBetweenDates / millisecondsInMinute
-                break;
+                return durationBetweenDates / MILLISEONDS_IN_MINUTE + ' minutes';
             case 'seconds':
-                return durationBetweenDates / millisecondsInSecond
-                break;
+                return durationBetweenDates / MILLISEONDS_IN_SECOND + ' seconds';
             default:
-                return 'Enter correct value!';
-                break;            
+                return 'Enter correct value!';            
         }
     }
 
@@ -436,8 +431,7 @@ function runHW10(){
     const userNames = ['Петро', 'Емма', 'Петро', 'Емма', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена', 'Емма'];
 
     function filterUnique(array) {
-        let uniqueArray = new Set([...array]);
-        return [...uniqueArray];
+        return [...new Set(array)];
     }
 
     console.log(filterUnique(userNames)); // ['Петро', 'Емма', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
