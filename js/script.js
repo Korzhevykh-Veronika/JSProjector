@@ -410,13 +410,13 @@ function runHW10(){
 
         switch (dimensionality){
             case 'days':
-                return durationBetweenDates / MILLISEONDS_IN_MINUTE / MINUTES_IN_DAY + ' days';
+                return `${durationBetweenDates / MILLISEONDS_IN_MINUTE / MINUTES_IN_DAY} ${dimensionality}`;
             case 'hours':
-                return durationBetweenDates / MILLISEONDS_IN_MINUTE / MINUTES_IN_HOUR + ' hours';
+                return `${durationBetweenDates / MILLISEONDS_IN_MINUTE / MINUTES_IN_HOUR} ${dimensionality}`;
             case 'minutes':
-                return durationBetweenDates / MILLISEONDS_IN_MINUTE + ' minutes';
+                return `${durationBetweenDates / MILLISEONDS_IN_MINUTE} ${dimensionality}`;
             case 'seconds':
-                return durationBetweenDates / MILLISEONDS_IN_SECOND + ' seconds';
+                return `${durationBetweenDates / MILLISEONDS_IN_SECOND} ${dimensionality}`;
             default:
                 return 'Enter correct value!';            
         }
