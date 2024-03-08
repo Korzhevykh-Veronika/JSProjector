@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 11))
+let homework = Number(prompt('Please enter homework number:', 12))
 
 switch(homework){
     case 1:
@@ -35,6 +35,9 @@ switch(homework){
         break;   
     case 11:
         runHW11();
+        break;
+    case 12:
+        runHW12();
         break;
     default:
         console.log("Enter correct value (from 1 to 7)!")
@@ -502,4 +505,16 @@ function runHW11(){
 
     let slowedSomeFunction = slower(someFunction, 5);
     slowedSomeFunction('Veronika', 'Korzhevykh');
+}
+
+function runHW12(){
+    let headerTwo = document.querySelector('h2#headerTwo');
+    let sectionTag = document.querySelector('section');
+    let listWithText = document.querySelector('ul li:nth-of-type(5)');
+    let spanWithClass = document.querySelector('.hatredLevelCounter');
+
+    console.log(headerTwo);
+    console.log(sectionTag);
+    console.log(listWithText);
+    console.log(spanWithClass);
 }
