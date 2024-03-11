@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 10))
+let homework = Number(prompt('Please enter homework number:', 12))
 
 switch(homework){
     case 1:
@@ -33,6 +33,12 @@ switch(homework){
     case 10:
         runHW10();
         break;   
+    case 11:
+        runHW11();
+        break;
+    case 12:
+        runHW12();
+        break;
     default:
         console.log("Enter correct value (from 1 to 7)!")
         break;
@@ -434,6 +440,81 @@ function runHW10(){
         return [...new Set(array)];
     }
 
-    console.log(filterUnique(userNames)); // ['Петро', 'Емма', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
+    console.log(filterUnique(userNames)); // ['Петро', 'Емма', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];    
+}
+
+function runHW11(){
+
+    const movies = [
+        {
+            movieName: 'The Thing',
+            releaseYear: 1982,
+            directedBy: 'Carpenter',
+            runningTimeInMinutes: 109,
+        },
+        {
+            movieName: 'Aliens',
+            releaseYear: 1986,
+            directedBy: 'Cameron',
+            runningTimeInMinutes: 137,
+        },
+        {
+            movieName: 'Men in Black',
+            releaseYear: 1997,
+            directedBy: 'Sonnenfeld',
+            runningTimeInMinutes: 98,
+        },
+        {
+            movieName: 'Predator',
+            releaseYear: 1987,
+            directedBy: 'McTiernan',
+            runningTimeInMinutes: 107,
+        },
+    ];
     
+    console.log([...movies].sort(byProperty('releaseYear', '>'))); 
+    // виведе масив фільмів посортованих по року випуску, від старішого до новішого
+    console.log([...movies].sort(byProperty('runningTimeInMinutes', '<'))); 
+    // виведе масив фільмів посортованих по їх тривалості, від найдовшого до найкоротшого
+    console.log([...movies].sort(byProperty('movieName', '>'))); 
+    // виведе масив фільмів посортованих по назві, в алфавітному порядку
+    
+    function byProperty (property = 'releaseYear', direction = '>') {
+
+        switch (direction){
+            case '>':
+                return (a, b) => (a[property] > b[property] ? 1 : -1);
+            case '<':
+                return (a, b) => (a[property] < b[property] ? 1 : -1);
+        }
+    }
+
+    function someFunction(firstName, secondName){
+         return `Hi ${firstName} ${secondName}, lets start your work`;
+    }
+
+    function slower(func, seconds) {
+        return function(...args){
+            console.log(`Chill out, you will get you result in ${seconds} seconds`);
+            setTimeout(() => {
+                const result = func(...args);
+                console.log(result);
+            }, seconds * 1000);
+        };
+    }
+
+    let slowedSomeFunction = slower(someFunction, 5);
+    slowedSomeFunction('Veronika', 'Korzhevykh');
+}
+
+function runHW12(){
+    let headerTwo = document.querySelector('h2#headerTwo');
+    let sectionTag = document.querySelector('section');
+    let listWithText = document.querySelector('ul li:nth-of-type(5)');
+    let spanWithClass = document.querySelector('.hatredLevelCounter');
+
+    console.log(headerTwo);
+    console.log(sectionTag);
+    console.log(listWithText);
+    console.log(spanWithClass);
 }
