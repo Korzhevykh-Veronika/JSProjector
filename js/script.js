@@ -529,14 +529,13 @@ function runHW13(){
     const TURN_ON_STATE = "Turn On";
 
     const newButton = document.querySelector(".newButton");    
-    let newSpan = document.createElement('span'); 
-
+    
     if (localStorage.getItem("theme") != null){
         newButton.textContent = localStorage.getItem("theme");
         document.body.style.backgroundColor = localStorage.getItem("color");
         
-        newSpan.innerHTML = localStorage.getItem("lastDate");;            
-        newButton.after(newSpan);
+        let value = localStorage.getItem("lastDate");;            
+        appendSpan(value);
     }
 
     newButton.addEventListener("click", () =>  {       
@@ -550,13 +549,19 @@ function runHW13(){
             existingSpan.remove();
         }
         
-        newSpan.innerHTML = newButton.textContent == TURN_OFF_STATE ?  `Last turn off: ${dateNow}` : `Last  turn on: ${dateNow}`;            
-        newButton.after(newSpan);
+        let value = newButton.textContent == TURN_OFF_STATE ?  `Last turn off: ${dateNow}` : `Last  turn on: ${dateNow}`;
+        appendSpan(value);
         
         localStorage.setItem("theme", newButton.textContent);   
         localStorage.setItem("color", document.body.style.backgroundColor);   
-        localStorage.setItem("lastDate", newSpan.innerHTML);
+        localStorage.setItem("lastDate", value);
     });
+
+    function appendSpan(value){
+        let newSpan = document.createElement('span'); 
+        newSpan.innerHTML = value;            
+        newButton.after(newSpan);
+    }
 
     function getCurrentDateTime() {
         const now = new Date();
