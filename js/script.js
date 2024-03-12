@@ -535,7 +535,7 @@ function runHW13(){
         newButton.textContent = localStorage.getItem("theme");
         document.body.style.backgroundColor = localStorage.getItem("color");
         
-        newSpan.innerHTML = localStorage.getItem("date");;            
+        newSpan.innerHTML = localStorage.getItem("lastDate");;            
         newButton.after(newSpan);
     }
 
@@ -555,7 +555,7 @@ function runHW13(){
         
         localStorage.setItem("theme", newButton.textContent);   
         localStorage.setItem("color", document.body.style.backgroundColor);   
-        localStorage.setItem("date", newSpan.innerHTML);
+        localStorage.setItem("lastDate", newSpan.innerHTML);
     });
 
     function getCurrentDateTime() {
