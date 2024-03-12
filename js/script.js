@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 12))
+let homework = Number(prompt('Please enter homework number:', 13))
 
 switch(homework){
     case 1:
@@ -38,6 +38,9 @@ switch(homework){
         break;
     case 12:
         runHW12();
+        break;
+    case 13:
+        runHW13();
         break;
     default:
         console.log("Enter correct value (from 1 to 7)!")
@@ -517,4 +520,41 @@ function runHW12(){
     console.log(sectionTag);
     console.log(listWithText);
     console.log(spanWithClass);
+}
+
+function runHW13(){
+    const LIGHT_BACKGROUND_COLOR = "#f2c68c";
+    const DARK_BACKGROUND_COLOR = "#6a655f";
+    const TURN_OFF_STATE = "Turn Off";
+    const TURN_ON_STATE = "Turn On";
+
+    const newButton = document.querySelector(".newButton");    
+    let newSpan = document.createElement('span'); 
+
+    if (localStorage.getItem("Button") != null){
+        newButton.textContent = localStorage.getItem("Button");
+        document.body.style.backgroundColor = localStorage.getItem("Color");
+        
+        newSpan.innerHTML = localStorage.getItem("Date");;            
+        newButton.after(newSpan);
+    }
+
+    newButton.addEventListener("click", () =>  {       
+        let existingSpan = document.querySelector("span");        
+        let dateNow = new Date().toISOString();
+
+        newButton.textContent = newButton.textContent == TURN_OFF_STATE ? TURN_ON_STATE : TURN_OFF_STATE;
+        document.body.style.backgroundColor = newButton.textContent == TURN_OFF_STATE ? DARK_BACKGROUND_COLOR : LIGHT_BACKGROUND_COLOR;
+
+        if (existingSpan != null){
+            existingSpan.remove();
+        }
+        
+        newSpan.innerHTML = newButton.textContent == TURN_OFF_STATE ?  `Last turn off: ${dateNow}` : `Last  turn on: ${dateNow}`;            
+        newButton.after(newSpan);
+        
+        localStorage.setItem("Button", newButton.textContent);   
+        localStorage.setItem("Color", document.body.style.backgroundColor);   
+        localStorage.setItem("Date", newSpan.innerHTML);
+    });
 }
