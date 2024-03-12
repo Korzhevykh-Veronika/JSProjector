@@ -531,17 +531,17 @@ function runHW13(){
     const newButton = document.querySelector(".newButton");    
     let newSpan = document.createElement('span'); 
 
-    if (localStorage.getItem("Button") != null){
-        newButton.textContent = localStorage.getItem("Button");
-        document.body.style.backgroundColor = localStorage.getItem("Color");
+    if (localStorage.getItem("theme") != null){
+        newButton.textContent = localStorage.getItem("theme");
+        document.body.style.backgroundColor = localStorage.getItem("color");
         
-        newSpan.innerHTML = localStorage.getItem("Date");;            
+        newSpan.innerHTML = localStorage.getItem("date");;            
         newButton.after(newSpan);
     }
 
     newButton.addEventListener("click", () =>  {       
         let existingSpan = document.querySelector("span");        
-        let dateNow = new Date().toISOString();
+        let dateNow = getCurrentDateTime();
 
         newButton.textContent = newButton.textContent == TURN_OFF_STATE ? TURN_ON_STATE : TURN_OFF_STATE;
         document.body.style.backgroundColor = newButton.textContent == TURN_OFF_STATE ? DARK_BACKGROUND_COLOR : LIGHT_BACKGROUND_COLOR;
@@ -553,8 +553,20 @@ function runHW13(){
         newSpan.innerHTML = newButton.textContent == TURN_OFF_STATE ?  `Last turn off: ${dateNow}` : `Last  turn on: ${dateNow}`;            
         newButton.after(newSpan);
         
-        localStorage.setItem("Button", newButton.textContent);   
-        localStorage.setItem("Color", document.body.style.backgroundColor);   
-        localStorage.setItem("Date", newSpan.innerHTML);
+        localStorage.setItem("theme", newButton.textContent);   
+        localStorage.setItem("color", document.body.style.backgroundColor);   
+        localStorage.setItem("date", newSpan.innerHTML);
     });
+
+    function getCurrentDateTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+    
+        return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+    }
 }
