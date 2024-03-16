@@ -523,16 +523,22 @@ function runHW12(){
 }
 
 function runHW13(){
-    const LIGHT_BACKGROUND_COLOR = "#f2c68c";
-    const DARK_BACKGROUND_COLOR = "#6a655f";
     const TURN_OFF_STATE = "Turn Off";
     const TURN_ON_STATE = "Turn On";
+    var bodyElement = document.body;
 
     const newButton = document.querySelector(".newButton");    
     
     if (localStorage.getItem("theme") != null){
         newButton.textContent = localStorage.getItem("theme");
-        document.body.style.backgroundColor = localStorage.getItem("color");
+        if (newButton.textContent == TURN_OFF_STATE) {
+            bodyElement.classList.remove('dark-background');
+            bodyElement.classList.add('light-background');
+            
+         } else {
+            bodyElement.classList.remove('light-background');
+            bodyElement.classList.add('dark-background');
+         }
         
         let value = localStorage.getItem("lastDate");;            
         appendSpan(value);
@@ -542,18 +548,30 @@ function runHW13(){
         let existingSpan = document.querySelector("span");        
         let dateNow = getCurrentDateTime();
 
-        newButton.textContent = newButton.textContent == TURN_OFF_STATE ? TURN_ON_STATE : TURN_OFF_STATE;
-        document.body.style.backgroundColor = newButton.textContent == TURN_OFF_STATE ? DARK_BACKGROUND_COLOR : LIGHT_BACKGROUND_COLOR;
-
+        if (newButton.textContent == TURN_OFF_STATE) {
+            newButton.textContent = TURN_ON_STATE;
+            bodyElement.classList.remove('light-background');
+            bodyElement.classList.add('dark-background');          
+         } else {
+            newButton.textContent = TURN_OFF_STATE;
+            bodyElement.classList.remove('dark-background');
+            bodyElement.classList.add('light-background');
+         }
+        
         if (existingSpan != null){
             existingSpan.remove();
         }
         
-        let value = newButton.textContent == TURN_OFF_STATE ?  `Last turn off: ${dateNow}` : `Last  turn on: ${dateNow}`;
+        let value;
+        if (newButton.textContent == TURN_OFF_STATE) {
+            value =  `Last turn off: ${dateNow}`;
+         } else {
+            value =  `Last  turn on: ${dateNow}`;
+         }
+
         appendSpan(value);
         
-        localStorage.setItem("theme", newButton.textContent);   
-        localStorage.setItem("color", document.body.style.backgroundColor);   
+        localStorage.setItem("theme", newButton.textContent);
         localStorage.setItem("lastDate", value);
     });
 

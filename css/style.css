@@ -1,6 +1,14 @@
-body{
+body{    
+    color:rgb(64, 58, 56);
+    text-align: center;
+}
+
+.light-background{
     background-color:#f2c68c;
-    color:rgb(64, 58, 56);;
+}
+
+.dark-background{
+    background-color:#6a655f;
 }
 
 h1, h2{
@@ -36,7 +44,7 @@ span {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin-top: 40px; /* зміщення відносно кнопки */
+    margin-top: 40px;
     margin-left: 10px;
     font-size: 14px;
     color: #ffffff;
