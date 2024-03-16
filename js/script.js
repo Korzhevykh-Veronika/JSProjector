@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 13))
+let homework = Number(prompt('Please enter homework number:', 14))
 
 switch(homework){
     case 1:
@@ -41,6 +41,9 @@ switch(homework){
         break;
     case 13:
         runHW13();
+        break;
+    case 14:
+        runHW14();
         break;
     default:
         console.log("Enter correct value (from 1 to 7)!")
@@ -592,4 +595,162 @@ function runHW13(){
     
         return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
     }
+}
+
+function runHW14(){
+    // const
+    const TASKS_STORAGE_KEY = "tasks";
+    
+    // DOM variables
+    const form = document.querySelector(".create-task-form");
+    const taskInput = document.querySelector(".task-input");
+    const taskList = document.querySelector(".collection");
+    const clearButton = document.querySelector(".clear-tasks");
+    const filterInput = document.querySelector(".filter-input");
+    
+    // "storage" functions
+    const getTasksFromStorage = () => {
+      return JSON.parse(localStorage.getItem(TASKS_STORAGE_KEY)) || [];
+    };
+    
+    const storeTaskInStorage = (newTask) => {
+      const tasks = getTasksFromStorage();
+      tasks.push(newTask);
+    
+      localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+    };
+    
+    const clearTasksFromStorage = () => {
+      localStorage.removeItem(TASKS_STORAGE_KEY);
+    };
+
+    const removeTaskFromStorage = (index) => {
+        const tasks = getTasksFromStorage();
+      
+        tasks.splice(index, 1);
+      
+        localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+    };
+    
+    const editTaskFromStorage = (editTask, newValue) => {
+        const tasks = getTasksFromStorage();
+      
+        const editedIndex = tasks.findIndex((task) => task === editTask);
+        tasks.splice(editTask, 1, newValue);
+      
+        localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+      };
+    
+    // "tasks" functions
+    const appendLi = (value) => {
+      // Create and add LI element
+      const li = document.createElement("li");
+      // li.textContent = value; // Значення яке ввів користувач
+      li.innerHTML = `${value} <i class="fa fa-edit edit-item"></i> <i class="fa fa-remove delete-item"></i>`;
+      taskList.append(li);
+    };
+    
+    const addTask = (event) => {
+      event.preventDefault();
+    
+      // Перевірка на пусте значення
+      const value = taskInput.value.trim();
+      if (value === "") {
+        return;
+      }
+      
+      appendLi(value);
+    
+      // Очистити форму
+      // 1 - скидає значення у input'a taskInput
+      taskInput.value = "";
+      // 2 - скидає всі значення форми
+      // form.reset();
+    
+      // Фокусуємось на input
+      taskInput.focus();
+    
+      // Зберігаємо елемент у localStorage
+      storeTaskInStorage(value);
+    };
+    
+    const clearTasks = () => {
+      taskList.innerHTML = "";
+      clearTasksFromStorage();
+    };
+    
+    const removeTask = (event) => {
+      const isDeleteButton = event.target.classList.contains("delete-item");
+      if (!isDeleteButton) {
+        return;
+      }
+    
+      const isConfirmed = confirm("Ви впевнені що хочете видалити це завдання?");
+      if (!isConfirmed) {
+        return;
+      }
+    
+      const li = event.target.closest("li");
+      const index = Array.from(taskList.children).indexOf(li);
+      li.remove();
+    
+      // Видалити зі сховища
+      const deletedTask = li.textContent.trim();
+      removeTaskFromStorage(index);
+    };
+
+    const editTask = (event) => {
+        const isEditButton = event.target.classList.contains("edit-item");
+        if (!isEditButton) {
+          return;
+        }
+      
+        let newValue = (prompt("Введіть нове значення:")).toString().trim();
+        if (newValue.length === 0 || newValue === null) {
+          return;
+        }
+      
+        const li = event.target.closest("li");
+        li.innerHTML = `${newValue} <i class="fa fa-edit edit-item"></i> <i class="fa fa-remove delete-item"></i>`;
+
+        const editedTask = li.textContent.trim();
+        editTaskFromStorage(editedTask, newValue);
+      };
+    
+    const filterTasks = ({ target: { value } }) => {
+      const text = value.toLowerCase();
+      const list = taskList.querySelectorAll("li"); // []
+    
+      list.forEach((li) => {
+        const liText = li.textContent.trim().toLowerCase();
+    
+        // if (liText.includes(text)) {
+        //   li.hidden = false;
+        // } else {
+        //   li.hidden = true;
+        // }
+        li.hidden = !liText.includes(text);
+      });
+    };
+    
+    const initTasks = () => {
+      const tasks = getTasksFromStorage();
+      // tasks.forEach((task) => appendLi(task));
+      tasks.forEach(appendLi);
+    };
+    
+    // Init
+    initTasks();
+    
+    // Event listeners
+    // onsubmit
+    form.addEventListener("submit", addTask);
+    
+    clearButton.addEventListener("click", clearTasks);
+    
+    taskList.addEventListener("click", removeTask);
+
+    taskList.addEventListener("click", editTask);
+    
+    filterInput.addEventListener("input", filterTasks);
 }
