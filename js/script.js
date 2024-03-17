@@ -632,11 +632,10 @@ function runHW14(){
         localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
     };
     
-    const editTaskFromStorage = (editTask, newValue) => {
+    const editTaskFromStorage = (index, newValue) => {
         const tasks = getTasksFromStorage();
       
-        const editedIndex = tasks.findIndex((task) => task === editTask);
-        tasks.splice(editTask, 1, newValue);
+        tasks.splice(index, 1, newValue);
       
         localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
       };
@@ -691,7 +690,7 @@ function runHW14(){
       }
     
       const li = event.target.closest("li");
-      const index = Array.from(taskList.children).indexOf(li);
+      const index = [...taskList.children].indexOf(li);
       li.remove();
     
       // Видалити зі сховища
@@ -704,17 +703,18 @@ function runHW14(){
         if (!isEditButton) {
           return;
         }
-      
-        let newValue = (prompt("Введіть нове значення:")).toString().trim();
+        
+        const li = event.target.closest("li");
+        let newValue = (prompt("Введіть нове значення:", li.firstChild.textContent.trim())).toString().trim();
         if (newValue.length === 0 || newValue === null) {
           return;
         }
       
-        const li = event.target.closest("li");
-        li.innerHTML = `${newValue} <i class="fa fa-edit edit-item"></i> <i class="fa fa-remove delete-item"></i>`;
+        li.firstChild.textContent = `${newValue} `;
+        const index = [...taskList.children].indexOf(li);
 
         const editedTask = li.textContent.trim();
-        editTaskFromStorage(editedTask, newValue);
+        editTaskFromStorage(index, newValue);
       };
     
     const filterTasks = ({ target: { value } }) => {
