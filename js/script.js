@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 12))
+let homework = Number(prompt('Please enter homework number:', 13))
 
 switch(homework){
     case 1:
@@ -38,6 +38,9 @@ switch(homework){
         break;
     case 12:
         runHW12();
+        break;
+    case 13:
+        runHW13();
         break;
     default:
         console.log("Enter correct value (from 1 to 7)!")
@@ -517,4 +520,76 @@ function runHW12(){
     console.log(sectionTag);
     console.log(listWithText);
     console.log(spanWithClass);
+}
+
+function runHW13(){
+    const TURN_OFF_STATE = "Turn Off";
+    const TURN_ON_STATE = "Turn On";
+    var bodyElement = document.body;
+
+    const newButton = document.querySelector(".newButton");    
+    
+    if (localStorage.getItem("theme") != null){
+        newButton.textContent = localStorage.getItem("theme");
+        if (newButton.textContent == TURN_OFF_STATE) {
+            bodyElement.classList.remove('dark-background');
+            bodyElement.classList.add('light-background');
+            
+         } else {
+            bodyElement.classList.remove('light-background');
+            bodyElement.classList.add('dark-background');
+         }
+        
+        let value = localStorage.getItem("lastDate");;            
+        appendSpan(value);
+    }
+
+    newButton.addEventListener("click", () =>  {       
+        let existingSpan = document.querySelector("span");        
+        let dateNow = getCurrentDateTime();
+
+        if (newButton.textContent == TURN_OFF_STATE) {
+            newButton.textContent = TURN_ON_STATE;
+            bodyElement.classList.remove('light-background');
+            bodyElement.classList.add('dark-background');          
+         } else {
+            newButton.textContent = TURN_OFF_STATE;
+            bodyElement.classList.remove('dark-background');
+            bodyElement.classList.add('light-background');
+         }
+        
+        if (existingSpan != null){
+            existingSpan.remove();
+        }
+        
+        let value;
+        if (newButton.textContent == TURN_OFF_STATE) {
+            value =  `Last turn off: ${dateNow}`;
+         } else {
+            value =  `Last  turn on: ${dateNow}`;
+         }
+
+        appendSpan(value);
+        
+        localStorage.setItem("theme", newButton.textContent);
+        localStorage.setItem("lastDate", value);
+    });
+
+    function appendSpan(value){
+        let newSpan = document.createElement('span'); 
+        newSpan.innerHTML = value;            
+        newButton.after(newSpan);
+    }
+
+    function getCurrentDateTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+    
+        return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+    }
 }
