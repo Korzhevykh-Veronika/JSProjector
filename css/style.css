@@ -1,4 +1,4 @@
-body{    
+body{
     color:rgb(64, 58, 56);
     text-align: center;
 }
@@ -19,6 +19,7 @@ div{
     font-size: 32 px
 }
 
+/*
 .container {
     position: relative;
     height: 100vh;
@@ -48,4 +49,47 @@ span {
     margin-left: 10px;
     font-size: 14px;
     color: #ffffff;
+}*/
+
+.container {
+    display: inline-block;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  button {
+    width: 100%;
+    background-color: #e59355;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 100%;
+  }
+
+.task-title{
+    text-align: center;
+    font-size: 200%;
+    margin: 30px 70px 20px 70px;
+}
+
+.collection {
+    list-style-type: circle;
+    font-size: 30px;
+    margin: 0;
+  }
+
+.collection li {
+    text-align: left;
+    margin: 10px 70px;
 }
