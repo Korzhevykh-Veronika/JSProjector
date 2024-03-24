@@ -760,15 +760,17 @@ function runHW14(){
 
 function runHW15(){
     class Publication {
+        #format;
+
         constructor(author, publicationDate, length, format) {
             this.author = author;
             this.publicationDate = publicationDate;
             this.length = length;
-            this.format = format;
+            this.#format = format;
         }
     
         getInfo() {
-            return`This publication was written by ${this.author} on ${this.publicationDate}. It contains ${this.length} pages. You can find it ${this.format}.`;
+            return`This publication was written by ${this.author} on ${this.publicationDate}. It contains ${this.length} pages. You can find it ${this.#format}.`;
         }
     
         dateValidation() {
@@ -779,14 +781,16 @@ function runHW15(){
     }
     
     class Book extends Publication {
+        #chapterCount;
+
         constructor(author, publicationDate, length, format, chapterCount, title) {
             super(author, publicationDate, length, format);
-            this._chapterCount = chapterCount;
+            this.#chapterCount = chapterCount;
             this.title = title;
         }
     
         getTitleWithChapterCount() {
-            return `${this.title} (with ${this._chapterCount} chapters)`;
+            return `${this.title} (with ${this.#chapterCount} chapters)`;
         }
     
         isLongBook() {
@@ -795,10 +799,12 @@ function runHW15(){
     }
     
     class Magazine extends Publication {
+        #advertisingCount;
+
         constructor(author, publicationDate, length, format, advertisingCount, readersCount) {
             super(author, publicationDate, length, format);
-            this.advertisingCount = advertisingCount;
-            this._readersCount = readersCount;
+            this.#advertisingCount = advertisingCount;
+            this.readersCount = readersCount;
         }
     
         getAdvertisingPercentage() {
@@ -806,19 +812,21 @@ function runHW15(){
         }
     
         isPopularMagazine() {
-            return this._readersCount >= 100;
+            return this.readersCount >= 100;
         }
     }
     
     class Textbook extends Book {
+        #classInfo;
+
         constructor(author, publicationDate, length, format, chapterCount, title, classInfo, subject) {
             super(author, publicationDate, length, format, chapterCount, title);
-            this._classInfo = classInfo;
+            this.#classInfo = classInfo;
             this.subject = subject;
         }
     
         getClassInfoWithSubject() {
-            return `${this._classInfo} - ${this.subject}`;
+            return `${this.#classInfo} - ${this.subject}`;
         }
     
         isScienceBook() {
@@ -827,9 +835,11 @@ function runHW15(){
     }
     
     class FairyTale extends Book {
+        #ageLimitation;
+
         constructor(author, publicationDate, length, format, chapterCount, title, ageLimitation, mainCharacter) {
             super(author, publicationDate, length, format, chapterCount, title);
-            this._ageLimitation = ageLimitation;
+            this.#ageLimitation = ageLimitation;
             this.mainCharacter = mainCharacter;
         }
     
@@ -838,18 +848,20 @@ function runHW15(){
         }
     
         isSuitableForAge(age) {
-            return age >= 6 && age <= this._ageLimitation;
+            return age >= 6 && age <= this.#ageLimitation;
         }
     }
     
-    class Forbes extends Magazine {
+    class Forbes extends Magazine {     
+        #issueNumber;
+
         constructor(author, publicationDate, length, format, advertisingCount, readersCount, issueNumber) {
             super(author, publicationDate, length, format, advertisingCount, readersCount);
-            this.issueNumber = issueNumber;
+            this.#issueNumber = issueNumber;
         }
     
         getReadersPerIssue() {
-            return Math.round(this._readersCount / this.issueNumber);
+            return Math.round(this.readersCount / this.#issueNumber);
         }
     
         isWidelyRead() {
