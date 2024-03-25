@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 14))
+let homework = Number(prompt('Please enter homework number:', 15))
 
 switch(homework){
     case 1:
@@ -44,6 +44,9 @@ switch(homework){
         break;
     case 14:
         runHW14();
+        break;
+    case 15:
+        runHW15();
         break;
     default:
         console.log("Enter correct value (from 1 to 7)!")
@@ -753,4 +756,160 @@ function runHW14(){
     taskList.addEventListener("click", editTask);
     
     filterInput.addEventListener("input", filterTasks);
+}
+
+function runHW15(){
+    class Publication {
+        #format;
+
+        constructor(author, publicationDate, length, format) {
+            this.author = author;
+            this.publicationDate = publicationDate;
+            this.length = length;
+            this.#format = format;
+        }
+    
+        getInfo() {
+            return`This publication was written by ${this.author} on ${this.publicationDate}. It contains ${this.length} pages. You can find it ${this.#format}.`;
+        }
+    
+        dateValidation() {
+            const minDate = new Date('2010-01-01');
+            const pubDate = new Date(this.publicationDate);
+            return pubDate <= minDate ? "Oh. Looks like this one's pretty old by now." : "Lucky you, you'll be the first one to get it.";
+        }
+    }
+    
+    class Book extends Publication {
+        #chapterCount;
+
+        constructor(author, publicationDate, length, format, chapterCount, title) {
+            super(author, publicationDate, length, format);
+            this.#chapterCount = chapterCount;
+            this.title = title;
+        }
+    
+        getTitleWithChapterCount() {
+            return `${this.title} (with ${this.#chapterCount} chapters)`;
+        }
+    
+        isLongBook() {
+            return this.length > 500;
+        }
+    }
+    
+    class Magazine extends Publication {
+        #advertisingCount;
+
+        constructor(author, publicationDate, length, format, advertisingCount, readersCount) {
+            super(author, publicationDate, length, format);
+            this.#advertisingCount = advertisingCount;
+            this.readersCount = readersCount;
+        }
+    
+        getAdvertisingPercentage() {
+            return (this.advertisingCount / this.length) * 100;
+        }
+    
+        isPopularMagazine() {
+            return this.readersCount >= 100;
+        }
+    }
+    
+    class Textbook extends Book {
+        #classInfo;
+
+        constructor(author, publicationDate, length, format, chapterCount, title, classInfo, subject) {
+            super(author, publicationDate, length, format, chapterCount, title);
+            this.#classInfo = classInfo;
+            this.subject = subject;
+        }
+    
+        getClassInfoWithSubject() {
+            return `${this.#classInfo} - ${this.subject}`;
+        }
+    
+        isScienceBook() {
+            return this.subject === "Science";
+        }
+    }
+    
+    class FairyTale extends Book {
+        #ageLimitation;
+
+        constructor(author, publicationDate, length, format, chapterCount, title, ageLimitation, mainCharacter) {
+            super(author, publicationDate, length, format, chapterCount, title);
+            this.#ageLimitation = ageLimitation;
+            this.mainCharacter = mainCharacter;
+        }
+    
+        getMainCharacterIntroduction() {
+            return `The main character of this fairy tale is ${this.mainCharacter}.`;
+        }
+    
+        isSuitableForAge(age) {
+            return age >= 6 && age <= this.#ageLimitation;
+        }
+    }
+    
+    class Forbes extends Magazine {     
+        #issueNumber;
+
+        constructor(author, publicationDate, length, format, advertisingCount, readersCount, issueNumber) {
+            super(author, publicationDate, length, format, advertisingCount, readersCount);
+            this.#issueNumber = issueNumber;
+        }
+    
+        getReadersPerIssue() {
+            return Math.round(this.readersCount / this.#issueNumber);
+        }
+    
+        isWidelyRead() {
+            return this.readersCount >= 1000000;
+        }
+    }
+    
+    class Vogue extends Magazine {
+        constructor(author, publicationDate, length, format, advertisingCount, readersCount, fashionTheme) {
+            super(author, publicationDate, length, format, advertisingCount, readersCount);
+            this.fashionTheme = fashionTheme;
+        }
+    
+        getFashionThemeWithLength() {
+            return `${this.fashionTheme} - ${this.length} pages`;
+        }
+    
+        isFashionableMagazine() {
+            return this.fashionTheme === "Fashion Trends";
+        }
+    }    
+    
+    let textBook = new Textbook("John Doe", "2004-03-01", 800, "offline", 20, "Mathematics bases", "Grade 10", "Mathematics");
+    console.log(textBook.getInfo());
+    console.log(textBook.dateValidation());
+    console.log("Book Title:", textBook.getTitleWithChapterCount());
+    console.log("Is Long Book:", textBook.isLongBook());
+    console.log(textBook.getClassInfoWithSubject());
+    console.log("Is Science Book:", textBook.isScienceBook());
+    console.log("---------------------------------------------");
+    
+    let fairyTale = new FairyTale("Kate Simson", "2023-05-15", 50, "online", 10, "Alice wonderland", 8, "Alice");
+    console.log(fairyTale.getInfo());
+    console.log("Introduction:", fairyTale.getMainCharacterIntroduction());
+    console.log("Is Suitable for Age 7:", fairyTale.isSuitableForAge(7));
+    console.log("---------------------------------------------");
+    
+    let forbes = new Forbes("Some Author", "2022-01-01", 100, "online", 50, 50000000000, 1000000);
+    console.log(forbes.getInfo());
+    console.log("Is popular magazine:", forbes.isPopularMagazine());
+    console.log("Readers Per Issue:", forbes.getReadersPerIssue());
+    console.log("Is Widely Read:", forbes.isWidelyRead());
+    console.log("---------------------------------------------");
+    
+    let vogue = new Vogue("Another Author", "2022-02-01", 80, "online", 40, 60, "Fashion Trends");
+    console.log(vogue.dateValidation());
+    console.log("Advertising percentage:", vogue.getAdvertisingPercentage());
+    console.log("Fashion Theme:", vogue.getFashionThemeWithLength());
+    console.log("Is Fashionable Magazine:", vogue.isFashionableMagazine());
+    console.log("---------------------------------------------");   
 }
