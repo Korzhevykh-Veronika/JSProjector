@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 15))
+let homework = Number(prompt('Please enter homework number:', 16))
 
 switch(homework){
     case 1:
@@ -47,6 +47,9 @@ switch(homework){
         break;
     case 15:
         runHW15();
+        break;
+    case 16:
+        runHW16();
         break;
     default:
         console.log("Enter correct value (from 1 to 7)!")
@@ -912,4 +915,81 @@ function runHW15(){
     console.log("Fashion Theme:", vogue.getFashionThemeWithLength());
     console.log("Is Fashionable Magazine:", vogue.isFashionableMagazine());
     console.log("---------------------------------------------");   
+}
+
+function runHW16(){
+    //выводит слово start
+    console.log('start');
+
+    //Создаёт новый Promise, который сразу же выполняется и выводится в консоль число 1
+    //потом вызывается функция resolve с аргументом 2.
+    const promise1 = new Promise((resolve, reject) => {
+        console.log(1);
+        resolve(2);
+    })
+
+    //Добавляет обработчик успешного выполнения (then) к Promise promise1.
+    //Когда promise1 выполнится успешно, то есть когда будет вызван resolve, будет выведено в консоль значение 2.
+    promise1.then(res => {
+        console.log(res);
+    })
+
+    //выводит слово end
+    console.log('end');
+
+    // Результат: 
+    //start
+    // 1
+    // 2
+    // end
+
+// создает Promise, которое сразу выполняется со значением 1
+    Promise.resolve(1)
+        // добавляет обработчик, который прибавляет 1 к значению 1 и передает результат в следующий обработчик (2)
+		.then((x) => x + 1)
+        // добавляет обработчик, который бросает ошибку
+		.then((x) => { throw new Error('My Error') })
+        // добавляет обработчик для перехвата ошибки, который возвращает значение 1
+		.catch(() => 1)
+        // добавляет обработчик, который прибавляет 1 к значению 1 (возвращенному из предыдущего обработчика) (2)
+		.then((x) => x + 1)
+        // добавляет обработчик для вывода значения в консоль
+		.then((x) => console.log(x))
+        // добавляет обработчик для перехвата любых ошибок и вывода их в консоль
+		.catch(console.error)
+
+        //Результат: 2
+
+
+        // создается promise, которое сразу же завершается успешно с результатом 2
+        const promise = new Promise(res => res(2));
+        promise.then(v => {
+                // выводит 2 в консоль
+                console.log(v);
+                // делает умножение, результат 4
+                return v * 2;
+            })
+            .then(v => {
+                // выводит 4 в консоль
+                console.log(v);
+                // умножает (8)
+                return v * 2;
+            })
+            .finally(v => {
+                // Метод finally вызывается всегда, независимо от успешного или неуспешного завершения обещания.
+                // но лн не получает аргументов, и его обратный вызов не возвращает никакого значения
+                // выводит undefined в консоль
+                console.log(v);
+                return v * 2;
+            })
+            .then(v => {
+                // выводит 8 в консоль
+                console.log(v);
+            });
+
+            // Результат:
+            // 2
+            // 4
+            // undefined
+            // 8
 }
