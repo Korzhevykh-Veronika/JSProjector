@@ -1,6 +1,6 @@
 "use strict";
 
-let homework = Number(prompt('Please enter homework number:', 16))
+let homework = Number(prompt('Please enter homework number:', 17))
 
 switch(homework){
     case 1:
@@ -50,6 +50,9 @@ switch(homework){
         break;
     case 16:
         runHW16();
+        break;
+    case 17:
+        runHW17();
         break;
     default:
         console.log("Enter correct value (from 1 to 7)!")
@@ -992,4 +995,35 @@ function runHW16(){
             // 4
             // undefined
             // 8
+}
+
+function runHW17(){    
+    const getUserInfo = async () => {
+        const response = await fetch('/api/for/user');
+        const userInfo = await response.json();
+
+        return userInfo;
+    }
+    
+    const retry = (asyncFunction, retries) => {
+        let attempt = 0;
+        return new Promise((resolve, reject) => {
+            const attemptCall = () => {
+                asyncFunction()
+                    .then(resolve)
+                    .catch(error => {
+                        attempt++;
+                        if (attempt === retries) {
+                            console.log("Log error: ")
+                            reject(error);
+                        } else {
+                            attemptCall();
+                        }
+                    });
+            };
+            attemptCall();
+        });
+    }
+    
+    retry(getUserInfo, 3);   
 }
