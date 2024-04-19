@@ -1012,10 +1012,10 @@ function runHW17(){
                 asyncFunction()
                     .then(resolve)
                     .catch(error => {
+                        console.error(error);
                         attempt++;
                         if (attempt === retries) {
-                            console.log("Log error: ")
-                            reject(error);
+                            reject();
                         } else {
                             attemptCall();
                         }
